@@ -9,9 +9,7 @@ body {
     margin: 20px;
 }
 
-/* -------------------- */
-/* BOUTONS              */
-/* -------------------- */
+
 button,
 input[type="submit"],
 input[type="button"],
@@ -54,9 +52,7 @@ input[type="button"]:focus,
     border-color: #666;
 }
 
-/* -------------------- */
-/* HEADER / NAV         */
-/* -------------------- */
+
 .header_nav_list {
     display: flex;
 }
@@ -73,9 +69,7 @@ input[type="button"]:focus,
     background: #f5f5f5;
 }
 
-/* -------------------- */
-/* TABLEAUX             */
-/* -------------------- */
+
 .tableau {
     width: 100%;
     border-collapse: collapse;
@@ -140,9 +134,7 @@ input[type="button"]:focus,
     height: 14px;
 }
 
-/* -------------------- */
-/* FORMULAIRE RECHERCHE */
-/* -------------------- */
+
 .form_recherche {
     display: grid;
     grid-template-columns: 110px 180px 110px 180px 110px 180px;
@@ -172,10 +164,7 @@ input[type="button"]:focus,
     background: #fff;
 }
 
-/* -------------------- */
-/* MESSAGES             */
-/* -------------------- */
-
+/*erreur*/
 
 .top-bar a.erreur_stock {
     background-color: red;
@@ -193,9 +182,7 @@ input[type="button"]:focus,
     margin-bottom: 8px;
 }
 
-/* -------------------- */
-/* CARTES               */
-/* -------------------- */
+
 .cartes {
     display: flex;
     flex-wrap: wrap;
@@ -220,10 +207,8 @@ input[type="button"]:focus,
     border: 1px solid #ccc;
     background: #fafafa;
 }
+/*modal*/
 
-/* -------------------- */
-/* FENETRES / MODALES   */
-/* -------------------- */
 .fenetre,
 .fenetre-defaut {
     display: none;
@@ -272,9 +257,8 @@ input[type="button"]:focus,
     padding: 10px 14px;
 }
 
-/* -------------------- */
-/* FORMULAIRES MODALES  */
-/* -------------------- */
+
+/* form modale*/
 .bloc-formulaire {
     display: flex;
     flex-direction: column;
