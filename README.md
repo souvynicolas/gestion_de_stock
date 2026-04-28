@@ -28,8 +28,22 @@ Il permet d’ajouter, modifier, supprimer, suivre les etapes et consulter les p
 - Gestion des quantités en stock
 
 ## ⚙️ Installation
+1.telecharger xammp:
+  Rendez vous sur : https://www.apachefriends.org/fr/index.html
+  Sélectionnez la version compatible avec votre système d’exploitation.
+  Installez xammp à la racine(c) de votre disque dur pour éviter les problèmes de privilèges.
+  Lancer Apache et MySQL.
 
-1. Cloner le projet :
+
+2. Cloner le projet :
 
 ```bash
-git clone https://github.com/souvynicolas/projet-gestion-de-stock.git
+git clone https://github.com/souvynicolas/projet-gestion-de-stock.git.
+
+3. Déplacer le dossier dans :
+
+C:\xampp\htdocs
+
+Aller sur : http://localhost/phpmyadmin
+Créer une base de données
+Importer le fichier .sql fourni dans le projet
