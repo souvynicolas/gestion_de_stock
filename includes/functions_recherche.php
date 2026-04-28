@@ -97,7 +97,7 @@ function rechercheHistorisation(
     $etape_precedente = null,
     $etape_en_cours = null,
     $anomalie = null,
-    $texte_anomalie = null,
+    /*$texte_anomalie = null,*/
     $date_debut = null,
     $date_fin = null
 ) {
@@ -108,9 +108,9 @@ function rechercheHistorisation(
                 e2.etp_libelle AS etape_en_cours,
                 t.tano_libelle AS anomalie,
                 h.hst_texte_anomalie,
-                h.hst_date_etape,
                 h.hst_statut_piece,
                 h.hst_temoin_suppression,
+                h.hst_date_etape,
                 h.hst_date_creation,
                 h.hst_date_suppression
             FROM historisation h
@@ -149,11 +149,10 @@ function rechercheHistorisation(
         $params[] = $anomalie;
     }
 
-    if (!empty($texte_anomalie)) {
+    /*if (!empty($texte_anomalie)) {
         $conditions[] = "h.hst_texte_anomalie LIKE ?";
         $params[] = "%" . $texte_anomalie . "%";
-    }
-
+    }*/
     if (!empty($date_debut)) {
         $conditions[] = "DATE(h.hst_date_creation) >= ?";
         $params[] = $date_debut;

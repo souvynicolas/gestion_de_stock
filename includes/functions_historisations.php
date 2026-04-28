@@ -31,7 +31,7 @@ function afficherTableauHistorisations($lists,$label ) {
             if (in_array($key, $colonnes_cachees, true)) {
                 continue;
             }
-            if (in_array($key, ['hst_date_creation', 'hst_date_mise_a_jour'], true)) {
+            if (in_array($key, ['hst_date_creation', 'hst_date_etape'], true)) {
                 if (!empty($value)) {
                     $value = date('d/m/Y H:i', strtotime($value));
                 }
@@ -90,7 +90,7 @@ function creerLigneHistorisation(PDO $pdo, array $params){
 }
 
 function selectAllHistorisation(PDO $pdo){
-    $sql = "SELECT h.hst_id,h.hst_numero_piece,a.art_libelle AS article,e1.etp_libelle AS etape_precedente,
+    $sql = "SELECT h.hst_numero_piece,a.art_libelle AS article,e1.etp_libelle AS etape_precedente,
                 e2.etp_libelle AS etape_en_cours,t.tano_libelle AS anomalie,h.hst_texte_anomalie,h.hst_date_etape,
                 h.hst_statut_piece,h.hst_temoin_suppression,h.hst_date_creation,
                 h.hst_date_suppression

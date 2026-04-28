@@ -52,20 +52,21 @@
         <div class="champ">
             <?php creerListePce($pdo,"etapes","etp_libelle", "etp_id", "etape_precedente","etp_temoin_suppression") ;?>
         </div>
-
-        <div class="champ">
-                <?php creerListePce($pdo,"etapes","etp_libelle", "etp_id", "etape_en_cours","etp_temoin_suppression") ;?>
+         <div class="champ">
+            <label for="date_debut">Date de création de :</label>
+            <input type="date" name="date_debut"
+            value="<?= htmlspecialchars((string)$hst_date_debut) ?>">
         </div>
 
+       
 
         <div class="champ">
             <?php creerListePce($pdo,"types_anomalie","tano_libelle", "tano_id", "anomalie", "tano_temoin_suppression") ;?>
         </div>
         <div class="champ">
-            <label for="date_debut">Date de mise a jour de :</label>
-            <input type="date" name="date_debut"
-            value="<?= htmlspecialchars((string)$hst_date_debut) ?>">
+                <?php creerListePce($pdo,"etapes","etp_libelle", "etp_id", "etape_en_cours","etp_temoin_suppression") ;?>
         </div>
+
         
     <div class="champ">
         <label for="date_fin">à :</label>
