@@ -74,7 +74,7 @@ http://localhost/phpmyadmin
 #### Étape 2 : Créer une base de données
 
 * Cliquer sur **"Nouvelle base de données"** (à gauche ou en haut)
-* Donner un nom à la base : `gestion_stock_test`
+* Donner un nom à la base : `gestion_de_stock_test`
 * Cliquer sur **Créer**
 
 ---
