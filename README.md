@@ -1,5 +1,5 @@
 # projet-gestion-de-stock
-deuxième projet epreuve e6 
+deuxième projet epreuve E6 
 
 
 Application web de gestion de stock développée avec PHP, MySQL, HTML, CSS et JavaScript.
