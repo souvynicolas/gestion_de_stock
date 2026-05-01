@@ -44,7 +44,7 @@ Il permet d’ajouter, modifier, supprimer, suivre les etapes et consulter les p
 ### 2. Cloner le projet
 
 ```bash
-git clone https://github.com/souvynicolas/projet-gestion-de-stock.git
+git clone https://github.com/souvynicolas/gestion_de_stock.git
 ```
 
 ---
