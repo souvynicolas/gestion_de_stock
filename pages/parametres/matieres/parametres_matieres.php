@@ -2,6 +2,9 @@
     require_once __DIR__ . '/../../../config/database.php';
     require_once __DIR__ . '/../../../includes/functions_layout.php';
     require_once __DIR__ . '/../../../includes/functions_parametres.php';
+    require_once __DIR__ . '/../../../classes/classe_parametres.php';
+
+    $class_parametres = new parametres($pdo);
 /*créer etapes*/
     $erreurs_matieres=[];
 if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_mat"])) {     
@@ -14,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_mat"])) {
     $erreurs_texte_matieres=validerTexte($mat_matieres,true,false);
 
     $erreurs_matieres = array_merge($erreurs_matieres, $erreurs_texte_matieres);
-    $matieres = selectAllMatieres($pdo);
+    $matieres =  $class_parametres->selectAllMatieres();
 
     foreach ($matieres as $matiere) {
         if ($matiere["matieres"] === $mat_matieres) {
@@ -23,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_mat"])) {
         }
     }
     if(empty($erreurs_matieres)) {
-        creerParametres($pdo,"matieres(mat_libelle)" ,[$mat_matieres]);
+        $class_parametres->creerParametres("matieres(mat_libelle)" ,[$mat_matieres]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -48,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_mat"])) {
     $erreurs_texte_matieres=validerTexte($mat_matieres,true,false);
 
     $erreurs_matieres = array_merge($erreurs_matieres, $erreurs_texte_matieres);
-    $matieres = selectAllMatieres($pdo);
+    $matieres =  $class_parametres->selectAllMatieres();
 
     foreach ($matieres as $matiere) {
         if ((int)$matiere["id"] !== $mat_id && $matiere["matieres"] === $mat_matieres) {
@@ -57,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_mat"])) {
     }
     }
     if(empty($erreurs_matieres)) {
-        modifierParametres($pdo,"matieres","mat_libelle","mat_id","mat_date_mise_a_jour",[$mat_matieres, $mat_id]);
+        $class_parametres->modifierParametres("matieres","mat_libelle","mat_id","mat_date_mise_a_jour",[$mat_matieres, $mat_id]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -78,13 +81,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_mat"])) {
     }
 
     if (empty($erreurs_matieres)) {
-        supprimerParametres($pdo, "matieres","mat_temoin_de_suppression","mat_id","mat_date_suppression", $mat_id);
+        $class_parametres->supprimerParametres("matieres","mat_temoin_de_suppression","mat_id","mat_date_suppression", $mat_id);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
 }
 
-$matieres=selectAllMatieres($pdo);
+$matieres= $class_parametres->selectAllMatieres();
 
 
 ?>

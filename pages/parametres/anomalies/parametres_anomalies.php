@@ -1,7 +1,13 @@
 <?php
     require_once __DIR__ . '/../../../config/database.php';
     require_once __DIR__ . '/../../../includes/functions_layout.php';
-    require_once __DIR__ . '/../../../includes/functions_parametres.php';if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_tano"])) {     
+    require_once __DIR__ . '/../../../includes/functions_parametres.php';
+    require_once __DIR__ . '/../../../classes/classe_parametres.php';
+
+    $class_parametres = new parametres($pdo);
+   $erreurs_anomalies=[];
+    
+    if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_tano"])) {     
     $tano_anomalies = strtoupper(trim($_POST["anomalies"] ?? ""));
 
     $erreurs_anomalies=[];
@@ -11,7 +17,7 @@
     $erreurs_texte_anomalies=validerTexte($tano_anomalies,true,false);
 
     $erreurs_anomalies = array_merge($erreurs_anomalies, $erreurs_texte_anomalies);
-    $anomalies = selectAllAnomalies($pdo);
+    $anomalies =  $class_parametres->selectAllAnomalies();
 
     foreach ($anomalies as $anomalie) {
         if ($anomalie["anomalies"] === $tano_anomalies) {
@@ -20,7 +26,7 @@
         }
     }
     if(empty($erreurs_anomalies)) {
-        creerParametres($pdo,"types_anomalie(tano_libelle)" ,[$tano_anomalies]);
+        $class_parametres->creerParametres("types_anomalie(tano_libelle)" ,[$tano_anomalies]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -46,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_tano"])) {
     $erreurs_texte_anomalies=validerTexte($tano_anomalies,true,false);
 
     $erreurs_anomalies = array_merge($erreurs_anomalies, $erreurs_texte_anomalies);
-    $anomalies = selectAllAnomalies($pdo);
+    $anomalies =  $class_parametres->selectAllAnomalies();
 
     foreach ($anomalies as $anomalie) {
         if ((int)$anomalie["id"] !== $tano_id && $anomalie["anomalies"] === $tano_anomalies) {
@@ -55,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_tano"])) {
     }
     }
     if(empty($erreurs_anomalies)) {
-        modifierParametres($pdo,"types_anomalie","tano_libelle","tano_id","tano_date_mise_a_jour",[$tano_anomalies, $tano_id]);
+        $class_parametres->modifierParametres("types_anomalie","tano_libelle","tano_id","tano_date_mise_a_jour",[$tano_anomalies, $tano_id]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -77,13 +83,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_tano"])) {
     }
 
     if (empty($erreurs_anomalies)) {
-        supprimerParametres($pdo, "types_anomalie","tano_temoin_suppression","tano_id","tano_date_supression", $tano_id);
+        $class_parametres->supprimerParametres("types_anomalie","tano_temoin_suppression","tano_id","tano_date_supression", $tano_id);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
 }
 
-$anomalies=selectAllAnomalies($pdo);
+$anomalies= $class_parametres->selectAllAnomalies();
 
 
 ?>

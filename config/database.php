@@ -1,6 +1,6 @@
 <?php 
     $host="127.0.0.1";
-    $dbname= "gestion_stock_test";
+    $dbname= "gestion_stock";
     $username="root";
     $password="root";
     $errors= [];

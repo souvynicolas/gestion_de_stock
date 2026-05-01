@@ -66,6 +66,7 @@ function creerListeParams(PDO $pdo, string $table, string $value_one, string $va
         }
     echo'</select>';    
 }
+/*
 function selectAllCouleurs(pdo $pdo){
     $sql="SELECT cou_id AS id,cou_libelle AS couleurs
     FROM couleurs
@@ -76,12 +77,6 @@ function selectAllCouleurs(pdo $pdo){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function creerCouleurs(Pdo $pdo, array $params) {
-        $sql=" INSERT INTO couleurs(cou_libelle) 
-            VALUES(?)";
-        $stmt=$pdo->prepare($sql);
-        $stmt->execute($params);
-    }
 
 function modifierParametres(PDO $pdo,string $table, string $set, string $id,string $mj_date, array $params){
     $sql="UPDATE $table
@@ -147,4 +142,4 @@ function selectAllAnomalies(pdo $pdo){
     $stmt=$pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+}*/

@@ -4,7 +4,10 @@ function afficherTableauDefaut($lists,$label ) {
     if (empty($lists)){
         return;
     }
-    $colonnes_cachees = [''];
+    $colonnes_cachees = ['art_id',
+    'etapes_en_cours',
+    'etapes_precedente',
+    'anomalie'];
 
     echo'<div class="table_container ">';
     echo '<table class="tableau" id="tableau">';

@@ -4,10 +4,14 @@
     require_once __DIR__ . '/../../includes/functions_articles.php';
     require_once __DIR__ . '/../../includes/functions_pieces.php';
     require_once __DIR__ . '/../../includes/layout.php';
+
+    require_once __DIR__ . '/../../classes/classe_articles.php';
+
+$class_articles = new Articles($pdo);
 /*créer articles*/
     $erreurs=[];
 if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_art"])) {      
-    $art_nom_article=$_POST["libelle"] ?? "";
+    $art_nom_article=strtoupper($_POST["libelle"] ?? "");
     $art_longueur = trim($_POST["longueur_id"] ?? "") !== "" ? (int) $_POST["longueur_id"] : null;
     $art_largeur = trim($_POST["largeur_id"] ?? "") !== "" ? (int) $_POST["largeur_id"] : null;
     $art_matieres = trim($_POST["matiere_id"] ?? "") !== "" ? (int) $_POST["matiere_id"] : null;
@@ -23,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_art"])) {
     
 
         if(empty($erreurs)) {
-            creerArticle($pdo, [$art_nom_article,$art_longueur, $art_largeur,$art_matieres,$art_couleurs,$art_stock_total_mini,$art_stock_mini]);
+            $class_articles->creerArticle([$art_nom_article,$art_longueur, $art_largeur,$art_matieres,$art_couleurs,$art_stock_total_mini,$art_stock_mini]);
             header("Location: articles.php");
             exit;
         }
@@ -46,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_art"])) {
 }
 
         if(empty($erreurs)) {
-            modifierArticles($pdo,[$art_nom_article,$art_longueur, $art_largeur,$art_matieres,$art_couleurs,$art_stock_total_mini,$art_stock_mini,$art_id]);
+             $class_articles->modifierArticles([$art_nom_article,$art_longueur, $art_largeur,$art_matieres,$art_couleurs,$art_stock_total_mini,$art_stock_mini,$art_id]);
         header("Location: articles.php");
         exit;
         }
@@ -67,13 +71,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_art"])) {
     }
 
     if (empty($erreurs)) {
-        supprimerArticle($pdo, $art_id);
+         $class_articles->supprimerArticle($art_id);
         header("Location: articles.php");
         exit;
     }
 }
 
-$articles=selectAllArticles($pdo);
+$articles= $class_articles->selectAllArticles();
 
     
 

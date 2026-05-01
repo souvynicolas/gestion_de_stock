@@ -6,6 +6,9 @@
     require_once __DIR__ . '/../../includes/functions_mouvements.php';
     require_once __DIR__ . '/../../includes/functions_recherche.php';
     require_once __DIR__ . '/../../includes/layout.php';
+    require_once __DIR__ . '/../../classes/classe_pieces.php';
+
+$class_pieces = new pieces($pdo);
 
     $pce_id = "";
 $pce_article = "";
@@ -36,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_pce"])) {
 
         }if(empty($erreurs)) {
         for ($i = 0; $i < $pce_quantite_pce; $i++) {
-            creerPiece($pdo, [$pce_num_article, $pce_etp_en_cours,$pce_anomalie]);
+            $class_pieces->creerPiece([$pce_num_article, $pce_etp_en_cours,$pce_anomalie]);
 
             $pce_id = (int)$pdo->lastInsertId();
 
@@ -98,7 +101,7 @@ $pce_id = (int)$pce_id;
             }
 
         }if(empty($erreurs)) {
-            modifierPiece($pdo,[$pce_etp_mdf_en_cours,$pce_etp_mdf_precedente,$pce_mdf_anomalie,$pce_mdf_text_anomalie,$pce_mdf_statut,$pce_id]);
+            $class_pieces->modifierPiece([$pce_etp_mdf_en_cours,$pce_etp_mdf_precedente,$pce_mdf_anomalie,$pce_mdf_text_anomalie,$pce_mdf_statut,$pce_id]);
 
             
             $piece = recupInfoPceHist($pdo, $pce_id);
@@ -147,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_pce"])) {
 
         $piece = recupInfoPceHist($pdo, $pce_id);
 
-        supprimerPiece($pdo, $pce_id);
+         $class_pieces->supprimerPiece($pce_id);
 
             if ($piece) {
                 creerLigneHistorisation($pdo, [
@@ -180,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_pce"])) {
     }
 
     if (empty($erreurs)) {
-        $etape_defaut = recupEtapeParLibelle($pdo, 'en defaut');
+        $etape_defaut =  recupEtapeParLibelle($pdo,'en defaut');
 
         if ($etape_defaut === null) {
             $erreurs[] = "Étape défaut introuvable.";
@@ -196,15 +199,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_pce"])) {
                     $type_anomalie = ($type_anomalie === '') ? null : (int)$type_anomalie;
                     $texte_anomalie = ($texte_anomalie === '') ? null : $texte_anomalie;
 
-                    changerEtapePieceAvecDefaut(
-                        $pdo,
+                    $class_pieces->changerEtapePieceAvecDefaut(
                         $piece_id,
                         $etape_defaut,
                         $type_anomalie,
                         $texte_anomalie
                     );
 
-                    $piece_maj = recupInfoPce($pdo, $piece_id);
+                    $piece_maj =  $class_pieces->recupInfoPce($piece_id);
                     if ($piece_maj) {
                         creerLigneHistorisation($pdo, [
                             'piece_id' => (int)$piece_maj['pce_id'],
@@ -234,7 +236,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_pce"])) {
     }
 
     $ouvrir_modal_defaut = true;
-    $pieces_defaut = selectPiecesParIds($pdo, $pieces_defaut_ids);
+    $pieces_defaut =  $class_pieces->selectPiecesParIds($pieces_defaut_ids);
 }
 
 /*mouvements*/
@@ -251,7 +253,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action_etape"])) {
 
 /*si defaut*/
     if (empty($erreurs) && $action_etape === 'en defaut') {
-        $pieces_defaut = selectPiecesParIds($pdo, $pieces_check_ids);
+        $pieces_defaut =  $class_pieces->selectPiecesParIds($pieces_check_ids);
         $ouvrir_modal_defaut = true;
     }
 
@@ -276,14 +278,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action_etape"])) {
                 foreach ($pieces_check_ids as $piece_id) {
                     $piece_id = (int)$piece_id;
 
-                    $piece_avant = recupInfoPce($pdo, $piece_id);
+                    $piece_avant =  $class_pieces->recupInfoPce($piece_id);
                     if (!$piece_avant) {
                         continue;
                     }
 
-                    $ancien_lot_id = recupLotActifPiece($pdo, $piece_id);
+                    $ancien_lot_id =  $class_pieces->recupLotActifPiece($piece_id);
 
-                    changerEtapePiece($pdo, $piece_id, $nouvelle_etape);
+                     $class_pieces->changerEtapePiece($piece_id, $nouvelle_etape);
 
                     if ($ancien_lot_id !== null) {
                         marquerPieceTraiteeDansLot($pdo, $ancien_lot_id, $piece_id);
@@ -294,7 +296,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action_etape"])) {
                         ajouterPieceDansLot($pdo, $lot_id, $piece_id);
                     }
 
-                    $piece_maj = recupInfoPce($pdo, $piece_id);
+                    $piece_maj =  $class_pieces->recupInfoPce($piece_id);
 
                     if ($piece_maj) {
                         creerLigneHistorisation($pdo, [
@@ -343,7 +345,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $resultat = $recuperer['resultat'];
 
 
-$pieces=selectAllPieces($pdo);
+$pieces= $class_pieces->selectAllPieces();
 
 
 ?>
@@ -462,7 +464,7 @@ $pieces=selectAllPieces($pdo);
                                 <td><?= htmlspecialchars($piece['longueur'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($piece['couleur'] ?? '') ?></td>
                                 <td>
-                                    <?php afficherSelectTypeAnomalieParPiece($pdo, 'types_anomalie[' . (int)$piece['id'] . ']'); ?>
+                                    <?php $class_pieces->afficherSelectTypeAnomalieParPiece('types_anomalie[' . (int)$piece['id'] . ']'); ?>
                                 </td>
                                 <td>
                                     <input type="text" name="textes_anomalie[<?= (int)$piece['id'] ?>]" value="">

@@ -20,8 +20,8 @@ $stocks=compterStock($pdo);
 <body>
     <?php afficherHeader(); ?>
     <h1>stock</h1>
-    <?php afficherTableauParametres($stocks,['art', Ecart]); ?>
-     <script src="../../assets/javascript.js"></script>
+    <?php afficherTableauParametres($stocks,['art', 'Ecart']); ?>
+    <script src="../../assets/javascript.js"></script>
 </body>
 </html>
     

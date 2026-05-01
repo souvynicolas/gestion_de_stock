@@ -2,6 +2,9 @@
     require_once __DIR__ . '/../../../config/database.php';
     require_once __DIR__ . '/../../../includes/functions_layout.php';
     require_once __DIR__ . '/../../../includes/functions_parametres.php';
+    require_once __DIR__ . '/../../../classes/classe_parametres.php';
+
+    $class_parametres = new parametres($pdo);
 /*créer dimensions*/
 
 if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_dim"])) {     
@@ -14,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_dim"])) {
     $erreurs_texte_dimensions=validerTexte($dim_dimensions,false,true);
 
     $erreurs_dimensions = array_merge($erreurs_dimensions, $erreurs_texte_dimensions);
-    $dimensions = selectAllDimensions($pdo);
+    $dimensions =  $class_parametres->selectAllDimensions();
 
     foreach ($dimensions as $dimension) {
         if ((int)$dimension["dimensions"] === (int)$dim_dimensions) {
@@ -23,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_dim"])) {
         }
     }
     if(empty($erreurs_dimensions)) {
-        creerParametres($pdo,"dimensions(dim_libelle)" ,[$dim_dimensions]);
+        $class_parametres->creerParametres("dimensions(dim_libelle)" ,[$dim_dimensions]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -49,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_dim"])) {
     $erreurs_texte_dimensions=validerTexte( $dim_dimensions,false,true);
 
     $erreurs_dimensions = array_merge($erreurs_dimensions, $erreurs_texte_dimensions);
-    $dimensions = selectAllDimensions($pdo);
+    $dimensions = $class_parametres->selectAllDimensions();
 
     foreach ($dimensions as $dimension) {
         if ((int)$dimension["id"] !== $dim_id && (int)$dimension["dimensions"] === (int)$dim_dimensions) {
@@ -58,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_dim"])) {
     }
     }
     if(empty($erreurs_dimensions)) {
-        modifierParametres($pdo,"dimensions","dim_libelle","dim_id","dim_date_mise_a_jour",[$dim_dimensions, $dim_id]);
+        $class_parametres->modifierParametres("dimensions","dim_libelle","dim_id","dim_date_mise_a_jour",[$dim_dimensions, $dim_id]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -80,13 +83,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_dim"])) {
     }
 
     if (empty($erreurs_dimensions)) {
-        supprimerParametres($pdo, "dimensions","dim_temoin_de_suppression","dim_id","dim_date_suppression", $dim_id);
+        $class_parametres->supprimerParametres("dimensions","dim_temoin_de_suppression","dim_id","dim_date_suppression", $dim_id);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
 }
 
-$dimensions=selectAllDimensions($pdo);
+$dimensions= $class_parametres->selectAllDimensions();
 
 
 ?>

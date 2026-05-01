@@ -5,6 +5,7 @@ require_once __DIR__ . '/anomalies/parametres_anomalies.php';
 require_once __DIR__ . '/dimensions/parametres_dimensions.php';
 require_once __DIR__ . '/etapes/parametres_etapes.php';
 require_once __DIR__ . '/matieres/parametres_matieres.php';
+require_once __DIR__ . '/../../classes/classe_parametres.php';
 ?>
 
 

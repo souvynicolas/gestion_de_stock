@@ -2,7 +2,9 @@
     require_once __DIR__ . '/../../../config/database.php';
     require_once __DIR__ . '/../../../includes/functions_layout.php';
     require_once __DIR__ . '/../../../includes/functions_parametres.php';
+    require_once __DIR__ . '/../../../classes/classe_parametres.php';
 /*créer couleur*/
+$class_parametres = new parametres($pdo);
     $erreurs_couleurs=[];
 if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_cou"])) {     
     $cou_couleurs = strtoupper(trim($_POST["couleurs"] ?? ""));
@@ -14,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_cou"])) {
     $erreurs_texte_couleurs=validerTexte($cou_couleurs,true,false);
 
     $erreurs_couleurs = array_merge($erreurs_couleurs, $erreurs_texte_couleurs);
-    $couleurs = selectAllCouleurs($pdo);
+    $couleurs = $class_parametres->selectAllCouleurs();
 
     foreach ($couleurs as $couleur) {
         if ($couleur["couleurs"] === $cou_couleurs) {
@@ -23,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_cou"])) {
         }
     }
     if(empty($erreurs_couleurs)) {
-        creerCouleurs($pdo, [$cou_couleurs]);
+        $class_parametres->creerParametres("couleurs(cou_libelle)", [$cou_couleurs]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -49,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_cou"])) {
     $erreurs_texte_couleurs=validerTexte($cou_couleurs,true,false);
 
     $erreurs_couleurs = array_merge($erreurs_couleurs, $erreurs_texte_couleurs);
-    $couleurs = selectAllCouleurs($pdo);
+    $couleurs =$class_parametres->selectAllCouleurs();
 
     foreach ($couleurs as $couleur) {
         if ((int)$couleur["id"] !== $cou_id && $couleur["couleurs"] === $cou_couleurs) {
@@ -58,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_cou"])) {
     }
     }
     if(empty($erreurs_couleurs)) {
-        modifierParametres($pdo,"couleurs","cou_libelle","cou_id","cou_date_mise_a_jour",[$cou_couleurs, $cou_id]);
+        $class_parametres->modifierParametres("couleurs","cou_libelle","cou_id","cou_date_mise_a_jour",[$cou_couleurs, $cou_id]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -80,13 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_cou"])) {
     }
 
     if (empty($erreurs_couleurs)) {
-        supprimerParametres($pdo, "couleurs","cou_temoin_de_suppression","cou_id","cou_date_suppression", $cou_id);
+        $class_parametres->supprimerParametres("couleurs","cou_temoin_de_suppression","cou_id","cou_date_suppression", $cou_id);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
 }
 
-$couleurs=selectAllCouleurs($pdo);
-
-    /*afficherTableauParametres($couleurs,'');*/
+$couleurs=$class_parametres->selectAllCouleurs();
 ?>

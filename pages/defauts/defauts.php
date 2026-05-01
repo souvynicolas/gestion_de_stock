@@ -6,6 +6,10 @@ require_once __DIR__ . '/../../includes/functions_mouvements.php';
 require_once __DIR__ . '/../../includes/functions_defaut.php';
 require_once __DIR__ . '/../../includes/layout.php';
 require_once __DIR__ . '/../../includes/functions_historisations.php';
+require_once __DIR__ . '/../../classes/classe_pieces.php';
+
+$class_pieces = new pieces($pdo);
+
 
 $erreurs = [];
 
@@ -38,18 +42,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action_etape"])) {
                 foreach ($pieces_check_ids as $piece_id) {
                     $piece_id = (int)$piece_id;
 
-                    $piece_avant = recupInfoPce($pdo, $piece_id);
+                    $piece_avant = $class_pieces->recupInfoPce($piece_id);
                     if (!$piece_avant) {
                         continue;
                     }
 
-                    changerEtapePiece($pdo, $piece_id, $nouvelle_etape);
+                    $class_pieces->changerEtapePiece($piece_id, $nouvelle_etape);
 
                     if ($creer_lot && $lot_id !== null) {
                         ajouterPieceDansLot($pdo, $lot_id, $piece_id);
                     }
 
-                    $piece_maj = recupInfoPce($pdo, $piece_id);
+                    $piece_maj = $class_pieces->recupInfoPce($piece_id);
 
                     if ($piece_maj) {
                         creerLigneHistorisation($pdo, [

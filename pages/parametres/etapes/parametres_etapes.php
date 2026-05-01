@@ -2,6 +2,9 @@
     require_once __DIR__ . '/../../../config/database.php';
     require_once __DIR__ . '/../../../includes/functions_layout.php';
     require_once __DIR__ . '/../../../includes/functions_parametres.php';
+    require_once __DIR__ . '/../../../classes/classe_parametres.php';
+
+    $class_parametres = new parametres($pdo);
 /*créer etapes*/
 $erreurs_etapes=[];
 if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_etp"])) {     
@@ -14,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_etp"])) {
     $erreurs_texte_etapes=validerTexte($etp_etapes,true,false);
 
     $erreurs_etapes = array_merge($erreurs_etapes, $erreurs_texte_etapes);
-    $etapes = selectAllEtapes($pdo);
+    $etapes =  $class_parametres->selectAllEtapes();
 
     foreach ($etapes as $etape) {
         if ($etape["etapes"] === $etp_etapes) {
@@ -23,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_etp"])) {
         }
     }
     if(empty($erreurs_etapes)) {
-        creerParametres($pdo,"etapes(etp_libelle)" ,[$etp_etapes]);
+        $class_parametres->creerParametres("etapes(etp_libelle)" ,[$etp_etapes]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -49,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_etp"])) {
     $erreurs_texte_etapes=validerTexte($etp_etapes,true,false);
 
     $erreurs = array_merge($erreurs_etapes, $erreurs_texte_etapes);
-    $etapes = selectAllEtapes($pdo);
+    $etapes =  $class_parametres->selectAllEtapes();
 
     foreach ($etapes as $etape) {
         if ((int)$etape["id"] !== $etp_id && $etape["etapes"] === $etp_etapes) {
@@ -58,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_vld_mdf_etp"])) {
     }
     }
     if(empty($erreurs_etapes)) {
-        modifierParametres($pdo,"etapes","etp_libelle","etp_id","etp_date_mise_a_jour",[$etp_etapes, $etp_id]);
+        $class_parametres->modifierParametres("etapes","etp_libelle","etp_id","etp_date_mise_a_jour",[$etp_etapes, $etp_id]);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
@@ -80,13 +83,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"&& isset($_POST["btn_vld_spr_etp"])) {
     }
 
     if (empty($erreurs_etapes)) {
-        supprimerParametres($pdo, "etapes","etp_temoin_suppression","etp_id","etp_date_supression", $etp_id);
+        $class_parametres->supprimerParametres("etapes","etp_temoin_suppression","etp_id","etp_date_supression", $etp_id);
         header("Location: /gestion_de_stock/pages/parametres/parametres.php");
         exit;
     }
 }
 
-$etapes=selectAllEtapes($pdo);
+$etapes= $class_parametres->selectAllEtapes();
 
 
 ?>

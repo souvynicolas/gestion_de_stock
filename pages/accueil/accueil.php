@@ -6,6 +6,9 @@ require_once __DIR__ . '/../../includes/functions_historisations.php';
 require_once __DIR__ . '/../../includes/functions_mouvements.php';
 require_once __DIR__ . '/../../includes/functions_accueil.php';
 require_once __DIR__ . '/../../includes/layout.php';
+require_once __DIR__ . '/../../classes/classe_pieces.php';
+
+$class_pieces = new pieces($pdo);
 
 $erreurs = [];
 $ouvrir_modal_defaut = false;
@@ -48,8 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_valider_defaut_ac
                     $type_anomalie = ($type_anomalie === '') ? null : (int)$type_anomalie;
                     $texte_anomalie = ($texte_anomalie === '') ? null : $texte_anomalie;
 
-                    changerEtapePieceAvecDefaut(
-                        $pdo,
+                    $class_pieces->changerEtapePieceAvecDefaut(
                         $piece_id,
                         $etape_defaut,
                         $type_anomalie,
@@ -59,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_valider_defaut_ac
                     /* la pièce sort du lot courant*/
                     marquerPieceTraiteeDansLot($pdo, $lot_defaut_id, $piece_id);
 
-                    $piece_maj = recupInfoPce($pdo, $piece_id);
+                    $piece_maj = $class_pieces->recupInfoPce($piece_id);
 
                     if ($piece_maj) {
                         creerLigneHistorisation($pdo, [
@@ -90,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["btn_valider_defaut_ac
 
     /*si erreur, on réouvre le modal défaut*/
     $ouvrir_modal_defaut = true;
-    $pieces_defaut = selectPiecesParIds($pdo, $pieces_defaut_ids);
+    $pieces_defaut = $class_pieces->selectPiecesParIds($pieces_defaut_ids);
 }
 /*on traite uniquement les pièces cochées
 en stock / en defaut => update seulement + sortie du lot
@@ -116,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action_etape"])) {
         if ($action_etape === 'en defaut') {
             $ouvrir_modal_defaut = true;
             $lot_defaut_id = $lot_id;
-            $pieces_defaut = selectPiecesParIds($pdo, $pieces_check_ids);
+            $pieces_defaut = $class_pieces->selectPiecesParIds($pieces_check_ids);
         } else {
             $nouvelle_etape = recupEtapeParLibelle($pdo, $action_etape);
 
@@ -144,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action_etape"])) {
                     $piece_id = (int)$piece_id;
 
                     /* update de la pièce*/
-                    changerEtapePiece($pdo, $piece_id, $nouvelle_etape);
+                    $class_pieces->changerEtapePiece($piece_id, $nouvelle_etape);
 
                     /* la pièce sort du lot actuel*/
                     marquerPieceTraiteeDansLot($pdo, $lot_id, $piece_id);
@@ -155,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action_etape"])) {
                     }
 
                 /* historisation*/
-                    $piece_maj = recupInfoPce($pdo, $piece_id);
+                    $piece_maj = $class_pieces->recupInfoPce($piece_id);
 
                     if ($piece_maj) {
                         creerLigneHistorisation($pdo, [
@@ -257,7 +259,7 @@ foreach ($lots as $lot) {
                                 <td><?= htmlspecialchars($piece['longueur'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($piece['couleur'] ?? '') ?></td>
                                 <td>
-                                    <?php afficherSelectTypeAnomalieParPiece($pdo, 'types_anomalie[' . (int)$piece['id'] . ']'); ?>
+                                    <?php $class_pieces->afficherSelectTypeAnomalieParPiece('types_anomalie[' . (int)$piece['id'] . ']'); ?>
                                 </td>
                                 <td>
                                     <input type="text" name="textes_anomalie[<?= (int)$piece['id'] ?>]" value="">

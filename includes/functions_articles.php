@@ -1,5 +1,5 @@
 <?php 
-function selectAllArticles(pdo $pdo){
+/*function selectAllArticles(pdo $pdo){
     $sql="SELECT a.art_id AS id,
             a.art_libelle AS libelle,
             a.art_largeur AS largeur_id,
@@ -26,7 +26,7 @@ function selectAllArticles(pdo $pdo){
     $stmt=$pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+}*/
 
 
 function afficherTableauArt($lists,$label ) {
@@ -92,7 +92,7 @@ function creerListeArt(PDO $pdo, string $table, string $value_one, string $value
     echo'</select>';    
 }
 
-function modifierArticles($pdo, array $params){
+/*function modifierArticles($pdo, array $params){
     $sql="UPDATE articles
     SET art_libelle= ?,art_longueur= ?, art_largeur= ?,  art_matiere= ?, 
     art_couleur = ?, art_stock_total_mini= ?, art_stock_mini= ?,
@@ -119,5 +119,5 @@ function supprimerArticle(PDO $pdo, int|string $params){
 
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([$params]);
-}
+}*/
     
