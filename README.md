@@ -28,22 +28,94 @@ Il permet d’ajouter, modifier, supprimer, suivre les etapes et consulter les p
 - Gestion des quantités en stock
 
 ## ⚙️ Installation
-1.telecharger xammp:
-  Rendez vous sur : https://www.apachefriends.org/fr/index.html
-  Sélectionnez la version compatible avec votre système d’exploitation.
-  Installez xammp à la racine(c) de votre disque dur pour éviter les problèmes de privilèges.
-  Lancer Apache et MySQL.
 
+### 1. Installer XAMPP
 
-2. Cloner le projet :
+* Télécharger XAMPP : https://www.apachefriends.org/fr/index.html
+* Installer le logiciel (laisser les options par défaut)
+* Lancer le **XAMPP Control Panel**
+* Démarrer :
+
+  * **Apache**
+  * **MySQL**
+
+---
+
+### 2. Cloner le projet
 
 ```bash
-git clone https://github.com/souvynicolas/projet-gestion-de-stock.git.
+git clone https://github.com/souvynicolas/projet-gestion-de-stock.git
+```
 
-3. Déplacer le dossier dans :
+---
 
+### 3. Placer le projet
+
+Déplacer le dossier dans :
+
+```txt
 C:\xampp\htdocs
+```
 
-Aller sur : http://localhost/phpmyadmin
-Créer une base de données
-Importer le fichier .sql fourni dans le projet
+---
+
+### 4. Importer la base de données avec phpMyAdmin
+
+#### Étape 1 : Ouvrir phpMyAdmin
+
+Dans votre navigateur :
+
+```txt
+http://localhost/phpmyadmin
+```
+
+---
+
+#### Étape 2 : Créer une base de données
+
+* Cliquer sur **"Nouvelle base de données"** (à gauche ou en haut)
+* Donner un nom à la base : `gestion_stock_test`
+* Cliquer sur **Créer**
+
+---
+
+#### Étape 3 : Importer le fichier `.sql`
+
+* Cliquer sur la base que vous venez de créer
+* Aller dans l’onglet **"Importer"**
+* Cliquer sur **"Choisir un fichier"**
+* Sélectionner le fichier `database.sql` présent dans le projet
+* Cliquer sur **Exécuter**
+
+👉 Si tout se passe bien, les tables apparaissent
+
+---
+
+### 5. Configurer la connexion à la base de données
+
+Dans le projet, ouvrir le fichier de connexion (ex : `config.php` ou `db.php`) et vérifier :
+
+```php
+$host = "localhost";
+$user = "root";
+$password = ""; // mettre votre mot de passe si vous en avez un
+$database = "gestion_stock"; // nom de la base créée
+```
+
+---
+
+### 6. Lancer le projet
+
+Dans votre navigateur :
+
+```txt
+http://localhost/gestion-de-stock
+```
+
+---
+
+## 💡 Remarques
+
+* phpMyAdmin est inclus dans XAMPP (pas besoin de l’installer séparément)
+* Le fichier `database.sql` contient la structure de la base de données
+* Vérifiez que Apache et MySQL sont bien démarrés avant d’ouvrir le projet
