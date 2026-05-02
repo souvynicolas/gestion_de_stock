@@ -1,5 +1,5 @@
 # Projet-gestion\suivi-de-stock
-second projet pour l'épreuve E6 
+Second projet pour l'épreuve E6 
 
 
 Application web de gestion et suivi de stock développée avec PHP, MySQL, HTML, CSS et JavaScript.
