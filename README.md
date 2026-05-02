@@ -27,7 +27,15 @@ Il permet d’ajouter, modifier, supprimer, suivre les etapes et consulter les p
 - Affichage de la liste des produits
 - Gestion des quantités en stock
 
-## ⚙️ Installation
+## 🌍 Site en ligne
+
+Le projet est disponible ici :
+
+```txt
+https://projet2-gestion-stock.nicolassweb.fr
+
+
+## ⚙️ Installation en local
 
 ### 1. Installer XAMPP
 
@@ -56,7 +64,7 @@ Déplacer le dossier dans :
 ```txt
 C:\xampp\htdocs
 ```
-
+le nommer"gestion_de_stock"
 ---
 
 ### 4. Importer la base de données avec phpMyAdmin
@@ -84,7 +92,7 @@ http://localhost/phpmyadmin
 * Cliquer sur la base que vous venez de créer
 * Aller dans l’onglet **"Importer"**
 * Cliquer sur **"Choisir un fichier"**
-* Sélectionner le fichier `database.sql` présent dans le projet
+* Sélectionner le fichier `gestion_de_stock_test.sql` présent dans le projet
 * Cliquer sur **Exécuter**
 
 👉 Si tout se passe bien, les tables apparaissent
@@ -93,13 +101,13 @@ http://localhost/phpmyadmin
 
 ### 5. Configurer la connexion à la base de données
 
-Dans le projet, ouvrir le fichier de connexion (ex : `config.php` ou `db.php`) et vérifier :
+Dans le projet, ouvrir le fichier de connexion dans  le dossier config.php database.php et vérifier :
 
 ```php
 $host = "localhost";
 $user = "root";
 $password = ""; // mettre votre mot de passe si vous en avez un
-$database = "gestion_stock"; // nom de la base créée
+$database = "gestion_de_stock_test"; // nom de la base créée
 ```
 
 ---
@@ -113,9 +121,3 @@ http://localhost/gestion-de-stock
 ```
 
 ---
-
-## 💡 Remarques
-
-* phpMyAdmin est inclus dans XAMPP (pas besoin de l’installer séparément)
-* Le fichier `database.sql` contient la structure de la base de données
-* Vérifiez que Apache et MySQL sont bien démarrés avant d’ouvrir le projet
