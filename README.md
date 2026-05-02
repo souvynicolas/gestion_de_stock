@@ -107,7 +107,7 @@ Dans le projet, ouvrir le fichier de connexion dans  le dossier config.php datab
 $host = "localhost";
 $user = "root";
 $password = ""; // mettre votre mot de passe si vous en avez un
-$database = "gestion_de_stock_test"; // nom de la base créée
+$database = "gestion_de_stock_test";
 ```
 
 ---
