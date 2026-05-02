@@ -1,4 +1,4 @@
-# projet-gestion\suivi-de-stock
+# Projet-gestion\suivi-de-stock
 second projet pour l'épreuve E6 
 
 
