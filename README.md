@@ -1,13 +1,13 @@
-# projet-gestion-de-stock
-deuxième projet epreuve E6 
+# projet-gestion\suivi-de-stock
+second projet pour l'épreuve E6 
 
 
-Application web de gestion de stock développée avec PHP, MySQL, HTML, CSS et JavaScript.
+Application web de gestion et suivi de stock développée avec PHP, MySQL, HTML, CSS et JavaScript.
 
 ##  Description
 
-Ce projet permet de gérer un stock de linges simplement depuis une interface web.  
-Il permet d’ajouter, modifier, supprimer, suivre les etapes et consulter les produits enregistrés.
+Ce projet permet de gérer un stock de linges et son suivi lors de son cycle d'utilisation depuis une interface web.  
+Il permet d’ajouter, modifier et supprimer du linge mais aussi de suivre les étapes et consulter les actions effectuées (log).
 
 ## 🛠️ Technologies utilisées
 
@@ -20,7 +20,7 @@ Il permet d’ajouter, modifier, supprimer, suivre les etapes et consulter les p
 
 ##  Fonctionnalités
 
-- création de produits
+- Création de produits
 - Ajout de produits
 - Modification de produits
 - Suppression de produits
