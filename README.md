@@ -117,7 +117,7 @@ $database = "gestion_de_stock_test"; // nom de la base créée
 Dans votre navigateur :
 
 ```txt
-http://localhost/gestion-de-stock
+http://localhost/gestion_de_stock
 ```
 
 ---
