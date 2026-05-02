@@ -6,7 +6,8 @@ Application web de gestion et suivi de stock développée avec PHP, MySQL, HTML,
 
 ##  Description
 
-Ce projet permet de gérer un stock de linges et son suivi lors de son cycle d'utilisation depuis une interface web.  
+A l'aide d'une interface web, ce projet permet de gérer un stock de linge et le suivi individuel des pièces de linge pendant leur mise à disposition dans des locations saisonnières .  
+
 Il permet d’ajouter, modifier et supprimer du linge mais aussi de suivre les étapes et consulter les actions effectuées (log).
 
 ## 🛠️ Technologies utilisées
@@ -20,12 +21,12 @@ Il permet d’ajouter, modifier et supprimer du linge mais aussi de suivre les �
 
 ##  Fonctionnalités
 
-- Création de produits
-- Ajout de produits
-- Modification de produits
-- Suppression de produits
-- Affichage de la liste des produits
-- Gestion des quantités en stock
+- Gestion de paramètres
+- Gestion des articles (Création, mofification,suppression,visualisation)
+- Gestion des pièces de linges (Création, mofification,suppression,visualisation)
+- Suivi des pièces de linge pendant les étapes d'utilisation (Installation dans location, Envoi en lavage)
+- Gestion des défauts constatés sur les pièces de linge (Abimé, manquant...)
+- Gestion du stock et suivi des quantités
 
 ## 🌍 Site en ligne
 
@@ -34,6 +35,7 @@ Le projet est disponible ici :
 ```txt
 https://projet2-gestion-stock.nicolassweb.fr
 
+Solution de secours
 
 ## ⚙️ Installation en local
 
