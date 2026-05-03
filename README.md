@@ -30,6 +30,9 @@ Il permet d'assurer la gestion du linge (Création, modification, suppression) m
 - Consultation de l'historique des étapes
 - Gestion du stock et suivi des quantités
 
+## doumentation
+ synthèse des documents remit dans dossier documentations list_doc.png
+
 ## 🌍 Site en ligne
 
 Le projet est disponible ici :
@@ -53,11 +56,11 @@ Solution de secours
 
 ---
 
-### 2. Cloner le projet
+### 2. télécharger le dossier
 
-```bash
-git clone https://github.com/souvynicolas/gestion_de_stock.git
-```
+cliquer sur code en haut a droite
+download zip
+extraire le dossier
 
 ---
 
@@ -97,9 +100,10 @@ http://localhost/phpmyadmin
 * Aller dans l’onglet **"Importer"**
 * Cliquer sur **"Choisir un fichier"**
 * Sélectionner le fichier `gestion_de_stock_test.sql` présent dans le projet
-* Cliquer sur **Exécuter**
+* Cliquer sur **Importer**
 
 👉 Si tout se passe bien, les tables apparaissent
+ si erreur remplacer dans fichier gestion_de_stock_test.sql utfm_mb4_0900_ai_ci par utfm_mb4_0900_unicode_ci
 
 ---
 
