@@ -285,7 +285,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action_etape"])) {
 
                     $ancien_lot_id =  $class_pieces->recupLotActifPiece($piece_id);
 
-                     $class_pieces->changerEtapePiece($piece_id, $nouvelle_etape);
+                    $class_pieces->changerEtapePiece($piece_id, $nouvelle_etape);
 
                     if ($ancien_lot_id !== null) {
                         marquerPieceTraiteeDansLot($pdo, $ancien_lot_id, $piece_id);

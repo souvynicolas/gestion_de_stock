@@ -16,8 +16,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST["btn_vld_crt_art"])) {
     $art_largeur = trim($_POST["largeur_id"] ?? "") !== "" ? (int) $_POST["largeur_id"] : null;
     $art_matieres = trim($_POST["matiere_id"] ?? "") !== "" ? (int) $_POST["matiere_id"] : null;
     $art_couleurs = trim($_POST["couleur_id"] ?? "") !== "" ? (int) $_POST["couleur_id"] : null;
-    $art_stock_total_mini = trim($_POST["stock_total_mini"] ?? "") !== "" ? (int) $_POST["stock_total_mini"] : null;
-    $art_stock_mini = trim($_POST["stock_mini"] ?? "") !== "" ? (int) $_POST["stock_mini"] : null;
+    $art_stock_total_mini = trim($_POST["stock_total_mini"] ?? "") !== "" ? (int) $_POST["stock_total_mini"] : 0;
+    $art_stock_mini = trim($_POST["stock_mini"] ?? "") !== "" ? (int) $_POST["stock_mini"] : 0;
         
 
     
