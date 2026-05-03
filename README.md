@@ -1,13 +1,14 @@
-# projet-gestion-de-stock
-deuxième projet epreuve E6 
+# Projet-gestion\suivi-de-stock
+Second projet pour l'épreuve E6 
 
 
-Application web de gestion de stock développée avec PHP, MySQL, HTML, CSS et JavaScript.
+Application web de gestion et suivi de stock développée avec PHP, MySQL, HTML, CSS et JavaScript.
 
 ##  Description
 
-Ce projet permet de gérer un stock de linges simplement depuis une interface web.  
-Il permet d’ajouter, modifier, supprimer, suivre les etapes et consulter les produits enregistrés.
+A l'aide d'une interface web, ce projet permet de gérer un stock de linge et le suivi individuel des pièces de linge pendant leur mise à disposition dans des locations saisonnières .  
+
+Il permet d'assurer la gestion du linge (Création, modification, suppression) mais aussi de le suivre aux différentes étapes de son cycle d'utilisation.
 
 ## 🛠️ Technologies utilisées
 
@@ -20,14 +21,25 @@ Il permet d’ajouter, modifier, supprimer, suivre les etapes et consulter les p
 
 ##  Fonctionnalités
 
-- création de produits
-- Ajout de produits
-- Modification de produits
-- Suppression de produits
-- Affichage de la liste des produits
-- Gestion des quantités en stock
+- Gestion de paramètres
+- Gestion des articles (Création, mofification,suppression,visualisation)
+- Gestion des pièces de linges (Création, mofification,suppression,visualisation)
+- Déclaration des actions d'installation et d'envoi en lavage (Vers blanchisserie) des pièces de linge
+- Gestion des défauts constatés sur les pièces de linge (Abimé, manquant...)
+- Historisation des étapes de suivi des pièces de linge
+- Consultation de l'historique des étapes
+- Gestion du stock et suivi des quantités
 
-## ⚙️ Installation
+## 🌍 Site en ligne
+
+Le projet est disponible ici :
+
+```txt
+https://projet2-gestion-stock.nicolassweb.fr
+
+Solution de secours
+
+## ⚙️ Installation en local
 
 ### 1. Installer XAMPP
 
@@ -56,7 +68,7 @@ Déplacer le dossier dans :
 ```txt
 C:\xampp\htdocs
 ```
-
+le nommer"gestion_de_stock"
 ---
 
 ### 4. Importer la base de données avec phpMyAdmin
@@ -84,7 +96,7 @@ http://localhost/phpmyadmin
 * Cliquer sur la base que vous venez de créer
 * Aller dans l’onglet **"Importer"**
 * Cliquer sur **"Choisir un fichier"**
-* Sélectionner le fichier `database.sql` présent dans le projet
+* Sélectionner le fichier `gestion_de_stock_test.sql` présent dans le projet
 * Cliquer sur **Exécuter**
 
 👉 Si tout se passe bien, les tables apparaissent
@@ -93,13 +105,13 @@ http://localhost/phpmyadmin
 
 ### 5. Configurer la connexion à la base de données
 
-Dans le projet, ouvrir le fichier de connexion (ex : `config.php` ou `db.php`) et vérifier :
+Dans le projet, ouvrir le fichier de connexion dans  le dossier config.php database.php et vérifier :
 
 ```php
 $host = "localhost";
 $user = "root";
 $password = ""; // mettre votre mot de passe si vous en avez un
-$database = "gestion_stock"; // nom de la base créée
+$database = "gestion_de_stock_test";
 ```
 
 ---
@@ -109,13 +121,7 @@ $database = "gestion_stock"; // nom de la base créée
 Dans votre navigateur :
 
 ```txt
-http://localhost/gestion-de-stock
+http://localhost/gestion_de_stock
 ```
 
 ---
-
-## 💡 Remarques
-
-* phpMyAdmin est inclus dans XAMPP (pas besoin de l’installer séparément)
-* Le fichier `database.sql` contient la structure de la base de données
-* Vérifiez que Apache et MySQL sont bien démarrés avant d’ouvrir le projet
